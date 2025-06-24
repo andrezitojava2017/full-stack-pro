@@ -1,0 +1,187 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.nav {
+    background-color: #181818;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    position: sticky;
+    top: 0;
+    z-index: 9;
+}
+
+.nav-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin-right: 20px;
+}
+
+.nav-list a {
+    color: white;
+    text-decoration: none;
+    padding: 20px;
+}
+
+.nav-list a:hover {
+    color: darkgray
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    padding-left: 10%;
+    width: 100%;
+
+    height: calc(100vh - 80px);
+    background-image: url('images/programador.png');
+}
+
+.main h1 {
+    color: white;
+    font-size: 54px;
+}
+
+.main p {
+    font-size: 24px;
+    font-style: italic;
+    color: green;
+    margin-top: 10px;
+    margin-bottom: 35px;
+}
+
+.main a {
+    text-decoration: none;
+}
+
+.main span {
+    background-color: green;
+    border-radius: 8px;
+    padding: 0 8px;
+}
+
+.call-to-action {
+    cursor: pointer;
+    background-color: white;
+    border: 0;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.4s;
+}
+
+.call-to-action:hover {
+    transform: scale(1.1);
+}
+
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 80px;
+    padding-top: 80px;
+    background-color: #696969;
+    color: white;
+}
+
+.about div {
+    max-width: 50%;
+    padding-right: 50px;
+}
+
+.about img {
+    max-width: 450px;
+    border-radius: 8px;
+}
+
+.about div h2 {
+    font-size: 32px;
+    margin-bottom: 14px;
+}
+
+footer {
+    background-color: #171810;
+    color: #06cf5b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0;
+    gap: 10px;
+}
+
+footer p {
+    font-size: 10px;
+}
+
+footer img {
+    width: 30px;
+    height: 30px;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+}
+
+.contact a {
+    text-decoration: none;
+    font-size: 10px;
+    color: #06cf5b;
+}
+
+@media(max-width:1050px) {
+
+    .main{
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .main h1 {
+        font-size: 35px;
+    }
+
+    .main p {
+        font-size: 18px;
+    }
+
+    .about {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding-bottom: 40px;
+        padding-top: 40px;
+    }
+
+    .about div {
+        max-width: 100%;
+        padding-right: 0;
+    }
+
+    .about img {
+        width: 350px;
+        height: 350px;
+    }
+
+    .about p {
+        text-align: justify;
+    }
+}
