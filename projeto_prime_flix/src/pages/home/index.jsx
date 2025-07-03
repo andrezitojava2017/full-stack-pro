@@ -4,6 +4,8 @@ import { Link } from "react-router";
 import "./home.css";
 
 const Home = () => {
+
+    const URL_IMAGE = import.meta.env.VITE_API_PATH_IMAGE;
   const [filmes, setFilmes] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -12,7 +14,7 @@ const Home = () => {
       const response = await api.get("movie/now_playing", {
         params: { page: 2 },
       });
-      console.log(response.data.results);
+     // console.log(response.data.results);
       setFilmes(response.data.results.slice(0, 10));
     };
 
@@ -38,7 +40,7 @@ const Home = () => {
             <article key={film.id}>
               <strong>{film.title}</strong>
               <img
-                src={`https://image.tmdb.org/t/p/original/${film.poster_path}`}
+                src={`${URL_IMAGE}${film.poster_path}`}
                 alt={film.title}
               />
               <Link to={`/filme/${film.id}`}>Acessar</Link>
