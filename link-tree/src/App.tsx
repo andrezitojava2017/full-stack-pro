@@ -16,14 +16,7 @@ function App() {
           </PrivateRoutes>
         }
       />
-      <Route
-        path="/login"
-        element={
-          <PrivateRoutes>
-            <Login />
-          </PrivateRoutes>
-        }
-      />
+      <Route path="/login" element={<Login />} />
       <Route
         path="/networks"
         element={

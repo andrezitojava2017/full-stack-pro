@@ -1,8 +1,12 @@
+import Header from "../../components/header/header";
 
 const Admin = () => {
   return (
-    <h1>Admin Page</h1>
-  )
-}
+    <div className="flex flex-col items-center min-h-screen">
+      <Header />
+      <h1>Admin Page</h1>
+    </div>
+  );
+};
 
 export default Admin;
