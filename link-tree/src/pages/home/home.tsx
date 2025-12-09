@@ -1,5 +1,11 @@
 import {FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa6";
 import Social from "../../components/social";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../service/firebase";
+
+
+
+
 
 const Home = () => {
   return (
