@@ -7,6 +7,8 @@ import {
   onSnapshot,
   orderBy,
   query,
+  deleteDoc,
+  doc,
 } from "firebase/firestore";
 import { db } from "../../service/firebase";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -75,15 +77,20 @@ const Admin = () => {
     }
   };
 
+  const deleteLink = async (id: string) => {
+    const docRef = doc(db, "links", id);
+    await deleteDoc(docRef);
+  };
+
   useEffect(() => {
-     getAllLinks();
+    getAllLinks();
 
     return () => {
       getAllLinks().then((unSub) => {
         if (unSub) {
           unSub();
         }
-     //   console.log("Unsubscribed from links collection");
+        //   console.log("Unsubscribed from links collection");
       });
     };
   }, []);
@@ -162,7 +169,12 @@ const Admin = () => {
             className="flex  justify-between items-center rounded-md p-2 mb-2"
           >
             <p>{link.name}</p>
-            <span className="p-2 bg-red-400 rounded hover:cursor-pointer">{<FaRegTrashAlt size={12} color={'black'}/> }</span>
+            <span
+              className="p-2 bg-red-400 rounded hover:cursor-pointer"
+              onClick={() => deleteLink(link.id)}
+            >
+              {<FaRegTrashAlt size={12} color={"black"} />}
+            </span>
           </article>
         ))}
       </div>
