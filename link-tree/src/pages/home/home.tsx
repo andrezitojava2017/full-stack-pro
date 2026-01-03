@@ -52,7 +52,6 @@ const Home = () => {
 
       <main className="flex flex-col w-11/12 max-w-xl text-center">
        
-       <button onClick={()=>console.log(links)}>lista</button>
 
         {links.length !== 0 ? (
           links.map((item) => (
