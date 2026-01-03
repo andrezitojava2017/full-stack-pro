@@ -4,6 +4,7 @@ import Login from "./pages/login/login";
 import Networks from "./pages/networks/networks";
 import Admin from "./pages/admin/admin";
 import PrivateRoutes from "./routes/PrivateRoutes";
+import NotFound from "./pages/error/error";
 
 function App() {
   return (
@@ -32,6 +33,10 @@ function App() {
             <Admin />
           </PrivateRoutes>
         }
+      />
+      <Route
+        path="*"
+        element={<NotFound/>}
       />
     </Routes>
   );
