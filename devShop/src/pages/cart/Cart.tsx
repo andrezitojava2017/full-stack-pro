@@ -3,7 +3,7 @@ import { CartContext } from "../../context/context";
 import { Link } from "react-router";
 
 const Cart = () => {
-  const { cart } = useContext(CartContext);
+  const { cart, addItemCart, removeItemCart, totalCart } = useContext(CartContext);
 
   return (
     <div className="w-full max-w-5xl px-4 mx-auto">
@@ -26,11 +26,13 @@ const Cart = () => {
             <strong>Preço: {item.price.toLocaleString('pt-br',{style:'currency', currency:'BRL'})}</strong>
 
             <div className="flex">
-              <button className="flex items-center bg-slate-600 rounded-md font-bold text-white px-2">
+              <button className="flex items-center bg-slate-600 rounded-md font-bold text-white px-2"
+              onClick={() => removeItemCart(item)}>
                 -
               </button>
               <span className="mx-2"> {item.amount} </span>
-              <button className="flex items-center bg-slate-600 rounded-md font-bold text-white px-2">
+              <button className="flex items-center bg-slate-600 rounded-md font-bold text-white px-2"
+              onClick={() => addItemCart(item)}>
                 +
               </button>
             </div>
@@ -40,7 +42,7 @@ const Cart = () => {
         );
       })}
 
-      <p className="font-bold mt-4">Total: R$1.000</p>
+      <p className="font-bold mt-4">Total: {totalCart}</p>
     </div>
   );
 };

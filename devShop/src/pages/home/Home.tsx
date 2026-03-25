@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { BsCartPlus } from "react-icons/bs";
 import api from "../../api/api";
 import { CartContext } from "../../context/context";
+import toast from "react-hot-toast";
 
 export interface ProductsProps {
   id: number;
@@ -31,7 +32,7 @@ const Home = () => {
 
 
   const handleAddCardItem = (product : ProductsProps)=>{
-
+    toast.success(`${product.title} adicionado ao carrinho!`)
     addItemCart(product)
   }
 
