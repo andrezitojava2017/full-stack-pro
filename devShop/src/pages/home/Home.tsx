@@ -3,6 +3,7 @@ import { BsCartPlus } from "react-icons/bs";
 import api from "../../api/api";
 import { CartContext } from "../../context/context";
 import toast from "react-hot-toast";
+import { Link } from "react-router";
 
 export interface ProductsProps {
   id: number;
@@ -14,7 +15,7 @@ export interface ProductsProps {
 
 const Home = () => {
   const [products, setProducts] = useState<ProductsProps[]>([]);
-  const {addItemCart} = useContext(CartContext)
+  const { addItemCart } = useContext(CartContext)
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -31,7 +32,7 @@ const Home = () => {
   }, []);
 
 
-  const handleAddCardItem = (product : ProductsProps)=>{
+  const handleAddCardItem = (product: ProductsProps) => {
     toast.success(`${product.title} adicionado ao carrinho!`)
     addItemCart(product)
   }
@@ -46,14 +47,15 @@ const Home = () => {
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-5 ">
           {products.length > 0 ? (
             products.map((product) => (
-            
+
               <section
                 className=" flex flex-col justify-evenly w-full border-gray-400 border rounded-md px-3 "
                 key={product.id}
               >
-                <img src={product.cover} className="rounded-lg max-h-70 mb-2" />
-                <p className="font-bold mt-1 mb-2">{product.title}</p>
-
+                <Link to={`/product/${product.id}`} key={product.id}>
+                  <img src={product.cover} className="rounded-lg max-h-70 mb-2" />
+                  <p className="font-bold mt-1 mb-2">{product.title}</p>
+                </Link>
                 <div className="flex gap-3 items-center mb-3">
                   <strong className="text-zinc-70">
                     {product.price.toLocaleString("pt-BR", {
@@ -62,10 +64,11 @@ const Home = () => {
                     })}
                   </strong>
                   <button className="bg-zinc-900 p-1 rounded-md">
-                    <BsCartPlus size={20} color="white" onClick={()=>handleAddCardItem(product)}/>
+                    <BsCartPlus size={20} color="white" onClick={() => handleAddCardItem(product)} />
                   </button>
                 </div>
               </section>
+
             ))
           ) : (
             <p>Carregando produtos...</p>
