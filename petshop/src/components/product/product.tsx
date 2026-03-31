@@ -1,3 +1,4 @@
+import { useCart } from "../../context/Cart";
 import type { Product } from "../../interface/product";
 
 type props = {
@@ -5,6 +6,9 @@ type props = {
 };
 
 const ProductItem = (productProps: props) => {
+
+  const {addToCart} = useCart();
+
   const formatPrice = (price: number) => {
     const resultPrice = new Intl.NumberFormat("pt-BR", {
       style: "currency",
@@ -24,10 +28,12 @@ const ProductItem = (productProps: props) => {
         <div className="flex flex-col gap-2">
           <h1 className="font-bold">{productProps.productProps.title}</h1>
           <hr className="text-gray-300"></hr>
-          <span className="font-medium text-[#1a7a6e]">
-            {formatPrice(productProps.productProps.price)}
-          </span>
-          <button className="bg-[#1a7a6e] rounded-2xl p-2 text-white"> + Adicionar ao carrinho</button>
+          <span className="font-medium">{formatPrice(productProps.productProps.price)}</span>
+          <button className="bg-[#1a7a6e] px-4 py-2 rounded-lg hover: cursor-pointer" onClick={()=> addToCart(productProps.productProps)}>
+            <span className="  text-white ">
+              + Adicionar
+            </span>
+          </button>
         </div>
       </div>
     </div>

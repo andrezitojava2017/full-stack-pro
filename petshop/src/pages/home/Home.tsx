@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import ProductItem from "../../components/product/product";
 import type { Product } from "../../interface/product";
 import { instanceApi } from "../../api/config";
+import { useCart } from "../../context/Cart";
 
 const Home = () => {
   const [listProducts, setListProducts] = useState<Product[]>([]);
+
+  const {cart}  = useCart();
 
   useEffect(() => {
     instanceApi({
@@ -42,7 +45,7 @@ const Home = () => {
 
       <section className="grid grid-cols-2 lg:grid-cols-4 max-w-[80%] w-full my-8 gap-4">
         {listProducts.length !== 0 ? (
-          listProducts.map((item) => <ProductItem productProps={item} />)
+          listProducts.map((item) => <ProductItem productProps={item} key={item.id} />)
         ) : (
           <div className=" bg-amber-400">
             <h1 className="text-center">Carregando Lista</h1>
