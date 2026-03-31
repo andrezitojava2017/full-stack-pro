@@ -49,6 +49,10 @@ const Home = () => {
           </div>
         )}
       </section>
+
+      <footer>
+        <h1>PetShop - Premium Store</h1>
+      </footer>
     </main>
   );
 };
