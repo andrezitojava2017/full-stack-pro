@@ -1,6 +1,10 @@
 import { FaCartShopping } from "react-icons/fa6";
+import { useCart } from "../../context/Cart";
 
 const Header = () => {
+
+    const { cart } = useCart();
+
     return (
         <header className="flex w-full items-center justify-center bg-gray-700 text-white h-28">
             <div className="flex  justify-between max-w-[80%] w-full ">
@@ -10,7 +14,12 @@ const Header = () => {
                 </div>
 
                 <div className="flex gap-2  items-center border-white border rounded-xl px-8 py-2">
-                    <FaCartShopping size={18} color="white" />
+                    <div className="relative">
+                        <FaCartShopping size={18} color="white" />
+                        {cart.length > 0 && (
+                            <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full px-1 text-xs">{cart.length}</span>
+                        )}
+                    </div>
                     <button>
                         Carrinho
                     </button>
