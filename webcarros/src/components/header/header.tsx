@@ -8,7 +8,7 @@ const Header = () => {
 
   return (
     <div className="w-full flex items-center justify-center h-16 bg-gray-800">
-      <header className="w-full max-w-7xl flex items-center justify-between px-4">
+      <header className="w-full max-w-6xl flex items-center justify-between px-4">
         <Link to="/">
           <img src={logo} alt="Logo" />
         </Link>
