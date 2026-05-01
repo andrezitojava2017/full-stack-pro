@@ -12,9 +12,7 @@ const storageBucket= import.meta.env.VITE_FIREBASE_STORAGE_BUCKET;
 const messagingSenderId= import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID;
 const appId= import.meta.env.VITE_FIREBASE_APP_ID;
 // Your web app's Firebase configuration
-console.log("Firebase Config:", {
-  apiKey,
-  authDomain});
+
 
 const firebaseConfig = {
   apiKey: apiKey,

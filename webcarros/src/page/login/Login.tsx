@@ -1,10 +1,13 @@
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import logo from '../../assets/logo.svg';
 import Container from '../../components/container/container';
 import Input from '../../components/form/Input';
 import z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod/src/index.js';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { auth } from '../../services/firebaseConfig';
+import { useEffect } from 'react';
 
 
 const schema = z.object({
@@ -16,13 +19,32 @@ type FormData = z.infer<typeof schema>;
 
 const Login = () => {
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    signOut(auth).then(() => {
+      console.log('Usuário deslogado com sucesso');
+    });
+  }, []);
+
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
     mode: 'onChange',
   });
 
   const onSubmit = (data: FormData) => {
-    console.log(data);
+
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        // Signed in 
+        navigate('/dashboard');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error('Erro ao logar:', errorCode, errorMessage);
+      });
+
   }
 
   return (
@@ -47,7 +69,7 @@ const Login = () => {
             placeholder='Digite sua senha'
             name="password"
             register={register}
-            error ={errors.password?.message}
+            error={errors.password?.message}
           />
 
           <button type='submit' className='px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-300 w-full ' >
@@ -55,7 +77,7 @@ const Login = () => {
           </button>
         </form>
 
-          <span>Não possui cadastro? <Link to='/register' className='text-blue-500 hover:underline'>Cadastrar</Link></span>
+        <span>Não possui cadastro? <Link to='/register' className='text-blue-500 hover:underline'>Cadastrar</Link></span>
       </div>
     </Container>
   )
