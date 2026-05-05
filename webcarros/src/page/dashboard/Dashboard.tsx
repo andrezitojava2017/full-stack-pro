@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { auth } from "../../services/firebaseConfig";
+import Painelheader from "../../components/painelHeader/PainelHeader";
 
 const Dashboard = () => {
 
@@ -13,6 +14,7 @@ const Dashboard = () => {
   
   return (
     <div>
+      <Painelheader/>
         <h1>Dashboard</h1>
     </div>
   )

@@ -1,32 +1,49 @@
 
 
 import { onAuthStateChanged } from 'firebase/auth';
-import React, { createContext, useEffect, useState, type ReactNode } from 'react';
+import React, { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import { auth } from '../services/firebaseConfig';
 
 type AuthContextType = {
     signed: boolean;
     loading?: boolean;
+    user: UserProps | null;
+    handleInfoUser: (user: UserProps) => void;
 }
 
 interface UserProps {
     uid: string;
-    name: string | null;
+    name?: string | null;
     email: string | null;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+export const useAuth = () => {
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error('useAuth must be used within an AuthProvider');
+    }
+    return context;
+};
 
-interface AuthProviderProps {
-    children: ReactNode;
-}
 
-const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+
+const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const [user, setUser] = useState<UserProps | null>(null);
     const [loading, setLoading] = useState(true);
 
+
+    const handleInfoUser = ({ name, email, uid }: UserProps) => {
+
+        setUser({
+            uid,
+            name,
+            email
+        })
+
+    }
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -36,7 +53,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                     name: displayName,
                     email
                 });
-                
+
             } else {
                 setUser(null);
             }
@@ -46,7 +63,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ signed: !!user }}>
+        <AuthContext.Provider value={{ signed: !!user, loading, user, handleInfoUser }}>
             {children}
         </AuthContext.Provider>
     );

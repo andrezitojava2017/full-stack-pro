@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router";
+
 import "./App.css";
 import Layout from "./components/layout/Layout";
 import Home from "./page/home/Home";
@@ -7,6 +7,7 @@ import Detail from "./page/car/Detail";
 import Dashboard from "./page/dashboard/Dashboard";
 import NewCar from "./page/dashboard/new/NewCar";
 import Login from "./page/login/Login";
+import { BrowserRouter, Route, Routes } from "react-router";
 
 function App() {
   return (
